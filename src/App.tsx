@@ -162,7 +162,7 @@ export default function App() {
               <label className="mb-2 block text-sm font-medium">Slider (Value: {sliderValue})</label>
               <Slider
                 value={sliderValue}
-                onValueChange={(val: any) => setSliderValue(val as number[])}
+                onValueChange={(val: number | readonly number[]) => setSliderValue(val as number[])}
                 max={100}
                 step={1}
               />
