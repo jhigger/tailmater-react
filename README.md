@@ -1,130 +1,73 @@
-# Tailmater UI Kit
-<img src="src/img/tailmater-template.png" alt="Tailmater UI">
+# React + TypeScript + Vite
 
-Tailmater is an open source Modern Web Material 3 UI Kit based on Tailwind css framework. Built with [Material Design 3](https://m3.material.io/) the latest version of Google's open-source design system. Tailmater use the MIT license so you can use it included in a commercial project. Credit to the Github page will always be appreciated. Development by [@ari_budin](https://twitter.com/ari_budin) . Pro Version available [Goodash Html](https://aribudin.gumroad.com/l/goodash) . React Version available [Goodash React](https://aribudin.gumroad.com/l/goodash-react) .  Next Js Version available [Goodash Next Js](https://aribudin.gumroad.com/l/goodash-next)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Demo Preview
+Currently, two official plugins are available:
 
-Demo: [https://aribudin.github.io/tailmater/](https://aribudin.github.io/tailmater/)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Installation
+## React Compiler
 
-* Clone the repository with the following command:
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-git clone https://github.com/aribudin/tailmater.git
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-* Run in terminal this command:
-
-```
-npx tailwindcss -i ./src/tailwindcss/tailwind.css -o ./src/css/style.css --watch
-```
-* Open html file in browser and start editing
-
-## Download file
-
-Download .zip file [in here](https://github.com/aribudin/tailmater/releases)
-                    
-## Tailmater JavaScript
-
-We provide examples of vanilla javascript functions for all Tailmater components. There are several components that require triggers to run such as snackbars, dialogs, range sliders and others.
-
-Put the script in the last line before close body
-```
-<script src="src/js/tailmater.js"></script>
-```
-
-**Toggles**
-
-Type  | Call  | Target  | Class
-------------- | ------------- | ------------- | -------------
-data-type="toggle"  | data-target="#value"  | id="value"  | .show
-
-**Accordion**
-
-Type  | Call  | Target  | Role  | Class
-------------- | ------------- | ------------- | ------------- | -------------
-data-type="collapse"  | data-target="#value"  | id="value"  | role="collapsed"  | .active
-
-**Sheets**
-                    
-Type  | Call  | Target  | Close  | Class
-------------- | ------------- | ------------- | ------------- | -------------
-data-type="sheets"  | data-target="#value"  | id="value"  | data-close="#value"  | .show
-
-**Dialogs**
-                    
-Type  | Call  | Target  | Close  | Class
-------------- | ------------- | ------------- | ------------- | -------------
-data-type="dialogs"  | data-target="#value"  | id="value"  | data-close="#value"  | .show
-
-**Menus**
-                    
-Type  | Call  | Target  | Role  | Class
-------------- | ------------- | ------------- | ------------- | -------------
-data-type="dropdown"  | data-target="#value"  | id="value"  | role="dropdownmenu"  | .show
-
-**Snackbar**
-                    
-Type  | Cal  | Target  | Close  | Class
-------------- | ------------- | ------------- | ------------- | -------------
-data-type="snackbar"  | data-target="#value"  | id="value"  | data-close="#value"  | .show
-
-**Tabs**
-                    
-Type  | Call  | Target  | Role  | Role 2  | Class
-------------- | ------------- | ------------- | ------------- | ------------- | -------------
-data-type="tabs"  | data-target="#value"  | id="value"  | role="tabpanel"  | role="indicator"  | .active
-
-**Circle Progress**
-                    
-Role  | Role 2  | Value(0-100)
-------------- | ------------- | -------------
-role="progress_bg"  | role="progress_fill"  | data-percent="value"
-
-**Dark Mode**
-                    
-Type  | Target  | Storage  | Class
-------------- | ------------- | ------------- | -------------
-data-type="theme"  | html  | localStorage.theme  | .dark
-
-**Range slider**
-                    
-Type  | Target
-------------- | -------------
-data-type="slider"  | nextElement
-
-**Navbar Scroll Up**
-                    
-Target  | Offset  | Class Visible  | Class Fixed
-------------- | ------------- | ------------- | -------------
-role="navtop"  | header  | .is-visible  | .is-fixed
-
-**Segmented Button**
-                    
-Target  | Status active
-------------- | -------------
-.segmented-item > input  | checked
-
-## Sources
-
-[Download Figma design](https://www.figma.com/community/file/1035203688168086460)
-
-
-## PRO VERSION HTML, REACT, NEXT JS
-<img src="src/img/goodash-react.jpg" alt="Goodash React Dashboard">
-
-* [Goodash Html](https://aribudin.gumroad.com/l/goodash)
-* [Goodash React](https://aribudin.gumroad.com/l/goodash-react)
-* [Goodash Next Js](https://aribudin.gumroad.com/l/goodash-next)
-
-## Authors & Sponsors
-
-* Ari Budin [@ari_budin](https://twitter.com/ari_budin)
-* Tailwind Dashboard [Taildash](https://tailwinddashboard.com/)
-* Tailwind Templates [Tailnet](https://themes.tailwindtemplate.net/)
-  
-## Credits
-
-* [Material Design 3](https://m3.material.io/)
-* [Tailwind Css](https://tailwindcss.com/)
