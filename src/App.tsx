@@ -159,18 +159,19 @@ export default function App() {
           <h2 className="text-2xl font-semibold mb-4">Forms & Progress</h2>
           <div className="space-y-8 max-w-sm">
             <div>
-              <label className="mb-2 block text-sm font-medium">Slider (Value: {sliderValue})</label>
+              <label htmlFor="example-slider" className="mb-2 block text-sm font-medium">Slider (Value: {sliderValue})</label>
               <Slider
+                id="example-slider"
                 value={sliderValue}
-                onValueChange={(val: any) => setSliderValue(val as number[])}
+                onValueChange={(val) => setSliderValue(val as number[])}
                 max={100}
                 step={1}
               />
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium">Progress Bar ({progressValue}%)</label>
-              <Progress value={progressValue} />
+              <label id="progress-label" className="mb-2 block text-sm font-medium">Progress Bar ({progressValue}%)</label>
+              <Progress aria-labelledby="progress-label" value={progressValue} />
               <Button
                 variant="outline"
                 size="sm"
